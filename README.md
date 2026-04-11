@@ -169,5 +169,5 @@ To run the project locally:
 
 ## Authors
 
-- Gurnoor Kaur Pawan  
-- Harshit Verma – https://github.com/harshitvmr-blip
+- Harshit Verma  
+- Gurnoor Kaur Pawan – https://github.com/Gurnoor2910
