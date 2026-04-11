@@ -1,102 +1,173 @@
-# GCP Three-Tier Expense Tracker
+# Expense Tracker – Cloud-Based Three-Tier Application
 
-A cloud-based Expense Tracker web application deployed on **Google Cloud Platform (GCP)**
-using a **three-tier architecture** (Frontend, Backend, Database).
+Expense Tracker is a cloud-based web application designed to manage and analyze daily expenses. It follows a three-tier architecture, separating the presentation, application, and database layers for scalability, maintainability, and security.
 
-This project was developed during my **Summer Internship** as part of my BCA program.
-
----
-
-## 📌 Project Overview
-
-The Expense Tracker helps users record, categorize, and analyze their daily expenses
-using a secure, scalable, and cloud-native architecture.
-
-The application is deployed on **GCP VM instances** behind a **Load Balancer** with
-**Cloud SQL (MySQL)** as the backend database.
+The application is built using a Flask backend, MySQL database, and a web-based frontend, with deployment support on cloud infrastructure.
 
 ---
 
-## 🏗 Three-Tier Architecture
+## Project Structure
 
-### Frontend
-- HTML, CSS, JavaScript
-- Hosted on GCP VM
-
-### Backend
-- Python Flask Framework
-- Gunicorn (WSGI Server)
-- NGINX (Reverse Proxy)
-
-### Database
-- Cloud SQL (MySQL)
-- Private IP connectivity
-
-📷 Architecture Diagram  
-![Architecture](docs/architecture.png)
+    Expense-Tracker/
+    |-- backend/
+    |   |-- app.py
+    |   |-- config.py
+    |   |-- requirements.txt
+    |-- templates/
+    |   |-- index.html
+    |   |-- edit.html
+    |-- static/
+    |   |-- css/
+    |   |-- js/
+    |-- README.md
 
 ---
 
-## ⚙ Technologies Used
+## Architecture Overview
 
-- Google Cloud Platform (GCP)
-- Compute Engine (VM Instances)
-- Cloud SQL (MySQL)
-- Linux (Debian)
-- Flask & SQLAlchemy
-- NGINX & Gunicorn
-- Git & GitHub
+This project implements a three-tier architecture:
+
+- Presentation Layer: HTML templates rendered using Flask  
+- Application Layer: Flask backend handling business logic and routing  
+- Data Layer: MySQL database hosted on cloud infrastructure  
 
 ---
 
-## ✨ Key Features
+## System Architecture
 
-- Add, edit, and delete expenses
-- Categorize expenses (Food, Transport, Utilities, etc.)
-- Generate monthly and category-based reports
-- Secure cloud database storage
-- Accessible from anywhere via cloud deployment
+```mermaid
+graph TD
+
+    A[User Browser] -->|HTTP Requests| B[Frontend - HTML/CSS/JS]
+
+    B -->|Form Submission| C[Flask Backend]
+
+    C -->|ORM Queries| D[SQLAlchemy]
+
+    D -->|SQL Queries| E[MySQL Database]
+
+    C -->|Render Templates| B
+
+    subgraph Presentation Layer
+        A
+        B
+    end
+
+    subgraph Application Layer
+        C
+        D
+    end
+
+    subgraph Data Layer
+        E
+    end
+```
+---
+
+## Features
+
+- Add, edit, and delete expenses  
+- Categorize expenses for better tracking  
+- Monthly and total expense calculation  
+- Category-wise analytics  
+- Responsive user interface  
+- Cloud database connectivity  
 
 ---
 
-## 🗄 Database Design
+## Database Configuration
 
-Entities:
-- Users
-- Expenses
-- Categories
+The application connects to a MySQL database using SQLAlchemy. Database credentials are managed in `config.py`.
 
-📷 ERD Diagram  
-![ERD](docs/erd.png)
+Example configuration:
 
----
-
-## 🚀 Deployment Summary
-
-1. Created VPC, subnets, and firewall rules
-2. Launched VM instances on GCP
-3. Installed and configured NGINX and Gunicorn
-4. Set up Cloud SQL with private IP
-5. Connected Flask backend to Cloud SQL
-6. Exposed application using Load Balancer
-
-Detailed steps → `deployment/deployment-steps.md`
+    DATABASE_CONFIG = {
+        'host': 'YOUR_DB_HOST',
+        'user': 'YOUR_USERNAME',
+        'password': 'YOUR_PASSWORD',
+        'database': 'YOUR_DATABASE'
+    }
 
 ---
 
-## 🧠 Learning Outcomes
+## Backend Setup
 
-- Real-world implementation of three-tier architecture
-- Hands-on experience with GCP infrastructure
-- Cloud networking (IP addressing, NAT, firewall rules)
-- Linux server administration
-- GitHub-based version control workflow
+1. Navigate to backend directory:
+
+       cd backend
+
+2. Install dependencies:
+
+       pip install -r requirements.txt
+
+3. Run the application:
+
+       python app.py
+
+The application will start on:
+
+       http://localhost:5000
 
 ---
 
-## 🔮 Future Enhancements
+## Dependencies
 
-- Two-factor authentication (2FA)
-- Budget alerts and notifications
-- AI-based spending insights
-- Mobile application support
+- Flask  
+- Flask-SQLAlchemy  
+- PyMySQL  
+- Gunicorn  
+
+---
+
+## Deployment
+
+This application can be deployed on cloud platforms such as:
+
+- Google Cloud Platform (Compute Engine / Cloud Run)  
+- AWS EC2  
+- Any Linux-based virtual machine  
+
+### Recommended Production Setup
+
+- Use Gunicorn as the WSGI server  
+- Configure Nginx as a reverse proxy  
+- Secure database access using firewall rules  
+- Store credentials using environment variables instead of hardcoding  
+
+---
+
+## Key Implementation Details
+
+- SQLAlchemy ORM is used for database interaction  
+- Expense model includes fields such as date, description, amount, category, and notes  
+- Data aggregation is performed for analytics (total spend, monthly spend, category breakdown)  
+- Server runs on `0.0.0.0` to allow external access in cloud environments  
+
+---
+
+## Local Development
+
+To run the project locally:
+
+1. Configure database credentials in `config.py`  
+2. Ensure MySQL server is running  
+3. Install dependencies  
+4. Run the Flask application  
+5. Access via browser  
+
+---
+
+## Future Enhancements
+
+- User authentication and role-based access  
+- API-based architecture for frontend-backend separation  
+- Docker containerization  
+- CI/CD pipeline integration  
+- Advanced analytics dashboard  
+
+---
+
+## Authors
+
+- Gurnoor Kaur Pawan  
+- Harshit Verma – https://github.com/harshitvmr-blip
